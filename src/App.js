@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+import Posts from "./Components/Posts";
 import "./App.css";
 
 function App() {
-  const [initialState, setInitialState] = useState({
+  const [initialState, setinitialState] = useState({
     data: [],
+    page: 1,
+    postsperpage: 5,
     pages: 1,
     limit: 50,
   });
 
-  const { limit } = initialState;
+  const { limit, data } = initialState;
 
   useEffect(() => {
     async function fetchFromApi() {
@@ -20,10 +23,12 @@ function App() {
       })
         .then((res) => res.json())
         .then((res) => {
-          setInitialState((previousState) => ({
-            ...previousState,
-            data: res.data,
-          }));
+          setinitialState((previousState) => {
+            return {
+              ...previousState,
+              data: res.data,
+            };
+          });
         });
     }
 
@@ -32,19 +37,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"></header>
+      <section>
+        {data.length > 0 ? <Posts posts={data} /> : null}
+      </section>
     </div>
   );
 }
