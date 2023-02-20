@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Posts from "./Components/Posts";
+import LimitInput from "./Components/LimitInput";
 import "./App.css";
 
 function App() {
@@ -37,10 +38,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <section>
-        {data.length > 0 ? <Posts posts={data} /> : null}
-      </section>
+      <header className="App-header">
+        <LimitInput />
+      </header>
+      <section>{data.length > 0 ? <Posts posts={data} /> : null}</section>
     </div>
   );
 }
