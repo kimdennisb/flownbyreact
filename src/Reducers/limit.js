@@ -3,10 +3,10 @@
  * updates the fetch limit
  */
 
-export const limit = (state = {}, action) => {
+export const limitR = (state = 0, action) => {
   switch (action.type) {
     case "LIMIT":
-      return { ...state, limit: action.limit };
+      return action.limit;
     default:
       return state;
   }

@@ -1,11 +1,29 @@
-const LimitInput = () => {
+import { useRef } from "react";
+import PropTypes from "prop-types";
+
+const LimitInput = (props, { store }) => {
+  const inputRef = useRef(null);
+  const onChange = (e) => {
+    store.dispatch({ type: "LIMIT", limit: Number(e.target.value) });
+  };
+
   return (
     <div className="limitinput">
       <label className="custom-field">
-        <input type="number" placeholder="&nbsp;"/>
-        <span class="placeholder">Enter Limit</span>
+        <input
+          ref={inputRef}
+          type="number"
+          placeholder="&nbsp;"
+          onChange={onChange}
+        />
+        <span className="placeholder">Enter Limit</span>
       </label>
     </div>
   );
 };
+
+LimitInput.contextTypes = {
+  store: PropTypes.object,
+};
+
 export default LimitInput;

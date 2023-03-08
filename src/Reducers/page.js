@@ -2,10 +2,11 @@
  * page reducer takes state and action and always returns state;
  * updates current page
  */
-export const page = (state = {}, action) => {
+
+export const pageR = (state = 0, action) => {
   switch (action.type) {
     case "PAGE":
-      return { ...state, page: action.page };
+      return action.page;
     default:
       return state;
   }
